@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <title>Миний Байршил</title>
+</head>
+<body style="font-family:sans-serif; padding: 20px;">
+  <h2>GPS Байршил Тогтоох</h2>
+  <p id="status">Байршлыг шалгаж байна...</p>
+  <p><strong>Өргөрөг:</strong> <span id="lat"></span></p>
+  <p><strong>Уртраг:</strong> <span id="lon"></span></p>
+
+  <script>
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          document.getElementById("status").textContent = "Амжилттай тогтоолоо!";
+          document.getElementById("lat").textContent = position.coords.latitude.toFixed(7);
+          document.getElementById("lon").textContent = position.coords.longitude.toFixed(7);
+        },
+        function(error) {
+          document.getElementById("status").textContent = "GPS алдаа: " + error.message;
+        }
+      );
+    } else {
+      document.getElementById("status").textContent = "Таны browser GPS дэмжихгүй байна.";
+    }
+  </script>
+</body>
+</html>
